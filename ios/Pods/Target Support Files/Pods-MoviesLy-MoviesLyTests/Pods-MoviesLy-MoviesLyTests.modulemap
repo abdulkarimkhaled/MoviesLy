@@ -1,6 +1,0 @@
-module Pods_MoviesLy_MoviesLyTests {
-  umbrella header "Pods-MoviesLy-MoviesLyTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
