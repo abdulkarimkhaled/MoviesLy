@@ -7,6 +7,16 @@ export default function* generalSaga(action) {
 
   let currentState = yield select()
   // API.setHeader('Accept-Language', getAppLanguage())
+
+  console.log('generalSaga', action);
+  yield put(Actions.enableLoader(action.payload.actionType));
+
+  if (action.payload.actionType == "SAVE") {
+    yield put(Actions.saveResponsePresist(action.payload, action.payload.body))
+    yield put(Actions.disableLoader(action.payload.actionType));
+    return
+  }
+
   console.log("Current State : ", action.payload.actionType, currentState)
 
   if (action.payload.setHeader && currentState.presistReducer.data.userData && currentState.presistReducer.data.userData.access_token) {
@@ -14,7 +24,6 @@ export default function* generalSaga(action) {
     API.setHeader("Authorization", "Bearer " + token)
   }
 
-  yield put(Actions.enableLoader(action.payload.actionType));
   let callMethod =
     action.payload.requestMethod == "POST" ? API.post :
       action.payload.requestMethod == "GET" ? API.get :
@@ -36,18 +45,15 @@ export default function* generalSaga(action) {
   try {
     //Will edit this section according to the api response
     if (response.ok) {
-      if (response.data.detail && !action.payload.noToast) {
-
+      if (response.data) {
         if (action.payload.reducerVariable) {
           if (action.payload.presist) {  // save in presist 
-            yield put(Actions.saveResponsePresist(action.payload, response.data.detail))
+            yield put(Actions.saveResponsePresist(action.payload, response.data))
           }
           else {  // save in general
-            yield put(Actions.saveResponseGeneral(action.payload, response.data.detail))
+            yield put(Actions.saveResponseGeneral(action.payload, response.data))
           }
         }
-
-
       }
       yield put(Actions.disableLoader(action.payload.actionType));
 
@@ -84,7 +90,6 @@ export default function* generalSaga(action) {
     }
   }
   catch {
-    NavigationService.navigate("NetworkError")
     yield put(Actions.disableLoader(action.payload.actionType));
   }
 }

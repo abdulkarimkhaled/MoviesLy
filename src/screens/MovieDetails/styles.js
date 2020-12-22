@@ -15,11 +15,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         width: '100%',
         paddingHorizontal: calcWidth(24),
-        borderBottomLeftRadius: calcWidth(0),
-        borderBottomRightRadius: calcWidth(30),
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
     },
     headerText: { fontSize: calcWidth(32), fontWeight: 'bold' },
     headerBottomLine: { width: '100%', height: calcHeight(2) },
@@ -29,7 +25,8 @@ const styles = StyleSheet.create({
         height: '100%',
         borderRadius: calcWidth(10),
     },
-    partitionText: { color: 'white', marginLeft: calcWidth(14), fontSize: calcWidth(20), fontWeight: 'bold' }
+    partitionText: { color: 'white', marginLeft: calcWidth(14), fontSize: calcWidth(20), fontWeight: 'bold' },
+    backIcon: { padding: calcWidth(10), marginRight: calcWidth(20) },
 
 });
 

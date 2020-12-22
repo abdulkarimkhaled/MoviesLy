@@ -1,11 +1,6 @@
-
-
-
 import ApiConstants from './ApiConstants'
 import { URLs } from './ApiConstants'
-
 import { Navigators } from '../navigation/NavigationStack'
-
 
 type Props = {
     serviceUrl: URLs,
@@ -25,11 +20,7 @@ type Props = {
     nextActionFailed?: Function
 }
 
-
-
-
 function payload(props: Props) {
-
     if (checkErrors(props)) {
         let serviceUrl = getUrl(props.serviceUrl)
         let actionType = props.serviceUrl
@@ -47,7 +38,6 @@ function payload(props: Props) {
         let noToast = props.noToast ? props.noToast : false
         let reducerVariableID = props.reducerVariableID ? props.reducerVariableID : null
         let nextActionFailed = props.nextActionFailed ? props.nextActionFailed : null
-
 
         return {
             serviceUrl,
@@ -67,10 +57,7 @@ function payload(props: Props) {
             reducerVariableID,
             nextActionFailed
         }
-
     }
-
-
 }
 
 function getAllApiConstants() {
@@ -81,48 +68,32 @@ function getAllApiConstants() {
         keys += "\n" + key
         keys += ","
     }
-
     if (flag) {
         keys += "||"
         keys = keys.replace(",||", "\n ")
     }
     console.log(keys)
-
     return keys
 }
-
-
-
 
 function getUrl(key) {
     return ApiConstants[key]
 }
 
-
-
-
 function checkErrors(props) {
     let serviceUrl = props.serviceUrl
     let requestMethod = props.requestMethod ? props.requestMethod.toUpperCase() : null
     let navigationType = props.navigationType ? props.navigationType.toLowerCase() : null
-    let reducerVariable = props.reducerVariable
-
-    // if (!reducerVariable) {
-    //     console.error("reducerVariable is required")
-    //     return false
-    // }
 
     if (!serviceUrl) {
         console.error("serviceUrl is required")
         return false
     }
     else {
-
         if (getUrl(serviceUrl) == null) {
             console.error("Invalid serviceUrl \'" + props.serviceUrl +
                 "\'. should be one of: (" + getAllApiConstants() + ")")
             return false
-
         }
     }
 

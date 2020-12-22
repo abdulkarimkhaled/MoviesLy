@@ -1,12 +1,14 @@
 
 import * as React from 'react'
 
-import Init from "./svgs/Init"
+import Search from "./svgs/Search"
+import Heart from "./svgs/Heart"
+import Back from "./svgs/Back"
 
 
 
 type Props = {
-  source: "Init"
+  source: "Search" | "Heart" | "Back"
   ,
   width?: Number,
   height?: Number,
@@ -19,8 +21,14 @@ type Props = {
 
 function Images(props: Props) {
   switch (props.source) {
-    case 'Init':
-      return <Init params={props} />;
+    case 'Search':
+      return <Search params={props} />;
+
+    case 'Heart':
+      return <Heart params={props} />;
+
+    case 'Back':
+      return <Back params={props} />;
 
     default:
       return null;

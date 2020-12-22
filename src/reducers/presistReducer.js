@@ -10,18 +10,28 @@ const initialState = {
 export const presistReducer = createReducer(initialState, {
     //Save data
     ["SAVE_PRESIST_REDUCER"](state, action) {
+        let array
+        let fav = state.data.Favorites
+        if (state.data && fav) {
+            array = fav
+            if (fav.some(fav => fav.id == action.response.id)) {
+                let index = fav.findIndex(fav => fav.id == action.response.id)
+                array.splice(index, 1)
+            } else {
+                array.push(action.response)
+            }
+        } else {
+            array = []
+            array.push(action.response)
+        }
         return {
             ...state,
             data: {
                 ...state.data,
-                [action.payload.reducerVariable]: action.response,
-
-            },
-            localLogin: action.payload.actionType == "LOGIN" ?
-                action.payload.extraData
-                :
-                null
+                [action.payload.reducerVariable]: array,
+            }
         };
+
     },
 
     //Clear data
@@ -31,6 +41,4 @@ export const presistReducer = createReducer(initialState, {
             data: []
         }
     },
-
-
 });
