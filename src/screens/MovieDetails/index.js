@@ -25,11 +25,11 @@ export default MovieDetails = (props) => {
     useEffect(() => { //call movie Api 
         let fav = presistState.data.Favorites
         setFavorite(
-            presistState.data && presistState.data.Favorites &&
+            presistState.data && presistState.data.Favorites && generalState.data.MovieDetails &&
                 presistState.data.Favorites.length != 0 ?
                 fav.some(fav => fav.id == generalState.data.MovieDetails.id) : false
         )
-    }, [presistState.data])
+    }, [generalState.data.MovieDetails, presistState.data])
 
 
     useEffect(() => {

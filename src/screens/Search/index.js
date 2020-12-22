@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, TextInput, TouchableOpacity, ActivityIndicator, Image, Text, Animated } from 'react-native';
+import { View, TextInput, TouchableOpacity, ActivityIndicator, Image, Text } from 'react-native';
 import styles from './styles';
 import GradientText from '../../components/TextGradient'
 import LinearGradient from 'react-native-linear-gradient';
-import { getPopularMovies, getUpcomingMovies, getTopRatedMovies, searchMovieByName } from '../../api/ApisFunctions';
+import { searchMovieByName } from '../../api/ApisFunctions';
 import { useDispatch, useSelector } from 'react-redux';
 import { calcHeight, calcWidth } from '../../config/metrics';
 import Images from '../../config/Images'
